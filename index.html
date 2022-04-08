@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+
+  <link rel="stylesheet" href="styles.css">
+
+  <title>Incremental Game | Yggor Goulart</title>
+</head>
+
+<body>
+  <section>
+
+
+
+    <div class="container">
+      <div class="content">
+        <h1>Clicker Game</h1>
+        <p>Exp: <span id="playerExp">0</span></p>
+        <button class="clicker" onclick="addToPlayerExp(totalBonus)" type="button" name="button"><img id="monsterImg" src="images/poring-normal.gif" alt=""></button>
+        <button class="buy-cursor" onclick="buyCursor()" type="button" name="button">Buy Cursor [<span id="cursorCost">15</span>]</button>
+        <button id="autoPlayButton" class="buy-cursor" onclick="buyAutoPlay()" type="button" name="button">Buy Autoplay [<span id="autoPlayPowerCost">50</span>]</button>
+      </div>
+  </section>
+
+  <script type="text/javascript" src="script.js"></script>
+</body>
+
+</html>
