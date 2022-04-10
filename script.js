@@ -67,9 +67,9 @@ function hitMonster(amount) {
   }, 100);
 }
 
-function changeMonsterAnimation (state) {
+function changeMonsterAnimation(state) {
   monsterState = state;
-  document.getElementById("monsterImg").setAttribute("src", "images/" + monster + "-" + state + ".gif")
+  document.getElementById("monsterImg").setAttribute("src", "images/monster/" + monster + "-" + state + ".gif")
 }
 
 function autoPlayInitializer () {
