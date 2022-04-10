@@ -14,9 +14,6 @@
   <!-- Font Awesome (Icons) -->
   <script src="https://kit.fontawesome.com/64de45cbba.js" crossorigin="anonymous"></script>
 
-  <!-- Scripts  -->
-  <script type="text/javascript" src="script.js"></script>
-
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
@@ -103,14 +100,14 @@
                 <div class="col">
                   <div class="d-flex text-start">
                     <div class="col-4 fw-bold">Job</div>
-                    <div id="playerJob" class="col-8"><span>Swordman</span></div>
+                    <div class="col-8"><span id="playerJob">Swordsman</span></div>
                   </div>
                 </div>
 
                 <div class="col">
                   <div class="d-flex text-start">
                     <div class="col-4 fw-bold">Lvl</div>
-                    <div id="playerLevel" class="col-8"><span>7</span></div>
+                    <div class="col-8"><span id="playerLevel">7</span></div>
                   </div>
                 </div>
 
@@ -162,14 +159,14 @@
                 <div class="col">
                   <div class="d-flex text-start">
                     <div class="col-4 fw-bold">Str</div>
-                    <div class="col-8"><span id="playerStrenght">10</span> + <span id="playerStrenghtBonus">3</span></div>
+                    <div class="col-8"><span id="playerStrength">10</span> + <span id="playerStrengthBonus">3</span></div>
                   </div>
                 </div>
 
                 <div class="col">
                   <div class="d-flex text-start">
                     <div class="col-4 fw-bold">Agi</div>
-                    <div class="col-8"><span id="playerAglity">10</span> + <span id="playerAgilityBonus">3</span></div>
+                    <div class="col-8"><span id="playerAgility">10</span> + <span id="playerAgilityBonus">3</span></div>
                   </div>
                 </div>
 
@@ -183,7 +180,7 @@
                 <div class="col">
                   <div class="d-flex text-start">
                     <div class="col-4 fw-bold">Int</div>
-                    <div class="col-8"><span id="playerInteligence">1</span><span id="playerInteligenceBonus"></span></div>
+                    <div class="col-8"><span id="playerIntelligence">1</span><span id="playerIntelligenceBonus"></span></div>
                   </div>
                 </div>
 
@@ -227,7 +224,7 @@
                 <div class="col">
                   <div class="d-flex text-start">
                     <div class="col-4 fw-bold">Matk</div>
-                    <div class="col-8"><span id="playerMagickAttack">10</span></div>
+                    <div class="col-8"><span id="playerMagicAttack">10</span></div>
                   </div>
                 </div>
 
@@ -248,7 +245,7 @@
                 <div class="col">
                   <div class="d-flex text-start">
                     <div class="col-4 fw-bold">Mdef</div>
-                    <div class="col-8"><span id="playerMagickDefense">10</span></div>
+                    <div class="col-8"><span id="playerMagicDefense">10</span></div>
                   </div>
                 </div>
 
@@ -279,17 +276,18 @@
 
       <!-- container monster -->
       <div class="col container-monster">
-
         <div class="row row-2 text-center justify-content-center">
           <div class="d-flex align-items-center justify-content-center img-monster">
-            <div class="" onclick="hitMonster(totalBonus)" type="button" name="button"><img class="" id="monsterImg" src="images/monster/poring-normal.gif" alt=""></div>
+            <div class="" onclick="hitMonster()"><img class="" id="monsterImg" src="images/monster/poring-normal.gif" alt=""></div>
           </div>
-
+          <div id="monsterName" class="col-2 h-100 p-2">Poring</div>
+          <div class="col-2 h-100 p-2">Level: <span id="monsterLevel">1</span></div>
           <div class="row align-items-start justify-content-between" >
-            <div id="monsterName" class="col-2 h-100 p-2">Poring</div>
-            <div class="col-2 h-100 p-2">Level: <span id="monsterLevel">1</span></div>
+
+                <div class="col-4 fw-bold">HP</div>
+                <div class="col-8"><span id="monsterHealthPoint">100</span> / <span id="monsterTotalHealthPoint">100</span></div>
             <button onclick="useFlyWing()" class="btn btn-outline-secondary col-4" type="button" name="button"><img class="pe-1" src="images/item/fly-wing.gif" alt="">Flee</button>
-            <button onclick="runFromBattle()"class="btn btn-outline-secondary col-3" type="button" name="button"><img class="pe-1" src="images/item/bean-bag.gif" alt="">Run</button>
+            <button onclick="runFromBattle()" class="btn btn-outline-secondary col-3" type="button" name="button"><img class="pe-1" src="images/item/bean-bag.gif" alt="">Run</button>
           </div>
 
 
@@ -466,7 +464,7 @@
 
           </div>
         </div>
-
+        <div id="logTextBox"></div>
         <script type="module">
           import {
             Toast
@@ -475,8 +473,10 @@
           Array.from(document.querySelectorAll('.toast'))
             .forEach(toastNode => new Toast(toastNode))
         </script>
-        <script type="text/javascript" src="script.js"></script>
 
+        <!-- Scripts  -->
+        <script type="text/javascript" src="script.js"></script>
+      </div>
 </body>
 
 </html>
