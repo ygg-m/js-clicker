@@ -5,335 +5,173 @@ var totalBonus = 1; // total de bonus
 var cursorCost = 15; // custo do cursor
 var cursors = 0; // número de cursores
 
-var autoPlayPower = 0;
+var autoPlayPower = 1;
 var autoPlayPowerCost = 50;
 
-// player ----------------------------------
-var playerName = 'Random Adventurer';
-var playerJob = 'Swordman';
 
-var playerLevel = 0
-var playerExperience = 0;
-var playerExperienceToNextLevel = 50
-var playerZeny = 0;
-
-var playerHealthPoint = 100; var playerTotalHealthPoint = 100;
-var playerSpecialPoint = 50; var playerTotalSpecialPoint = 50;
-
-var playerStrenght = 5;
-var playerAgility = 5;
-var playerVitality = 5;
-var playerInteligence = 5;
-var playerDexterity = 10;
-var playerLuck = 5;
-
-var playerStrenghtBonus = equipStrenghtBonus + skillStrenghtBonus + itemStrenghtBonus;
-var playerAgilityBonus = equipAgilityBonus + skillAgilityBonus + itemAgilityBonus;
-var playerVitalityBonus = equipVitalityBonus + skillVitalityBonus + itemVitalityBonus;
-var playerInteligenceBonus = equipInteligenceBonus + skillInteligenceBonus + itemInteligenceBonus;
-var playerDexterityBonus = equipDexterityBonus + skillDexterityBonus + itemDexterityBonus;
-var playerLuckBonus = equipLuckBonus + skillLuckBonus + itemLuckBonus;
-
-var playerTotalStrenght = playerStrenght + playerStrenghtBonus;
-var playerTotalAgility = playerAgility + playerAgilityBonus;
-var playerTotalVitality = playerVitality + playerVitalityBonus;
-var playerTotalInteligence = playerInteligence + playerInteligenceBonus;
-var playerTotalDexterity = playerDexterity + playerDexterityBonus;
-var playerTotalLuck = playerLuck + playerLuckBonus;
-
-var playerAttack = playerTotalStrenght + (playerTotalDexterity / 5) + (playerTotalLuck / 10) + equipAttack + equipAttackBonus + skillAttackBonus + itemAttackBonus;
-var playerMagickAttack = (playerTotalInteligence * 2) + (playerTotalLuck / 10) + equipMagickAttackBonus + skillMagickAttackBonus + itemMagickAttackBonus;
-var playerHit = playerTotalDexterity + (playerTotalLuck / 10) + equipHitBonus + skillHitBonus + itemHitBonus;
-var playerCrit = Math.round(Math.random() * (playerTotalLuck + equipLuckBonus + skillLuckBonus + itemLuckBonus));
-var playerDefense = (playerTotalVitality / 5) + (playerTotalLuck / 10) + equipDefense + equipDefenseBonus + skillDefenseBonus + itemDefenseBonus;
-var playerMagickDefense = (playerTotalInteligence / 8) + (playerTotalLuck / 10) + equipMagickDefenseBonus + skillMagickDefenseBonus + itemMagickDefenseBonus;
-var playerFlee = playerTotalAgility + (playerTotalLuck / 5) + equipFleeBonus + skillFleeBonus + itemFleeBonus;
-var playerAttackSpeed = ((playerTotalAgility + (playerTotalLuck / 10) + equipAttackSpeedBonus + skillAttackSpeedBonus + itemAttackSpeedBonus) * 100);
-
-// equipped
-var equipAttack = 2;
-var equipShield = 1;
-var equipArmor = 3;
-var equipGarment = 1;
-var equipShoes = 1;
-var equipDefense = equipDefense + equipArmor + equipGarment + equipShoes;
-
-// Bonuss
-var equipStrenghtBonus = 0;
-var equipAgilityBonus = 0;
-var equipVitalityBonus = 0;
-var equipInteligenceBonus = 0;
-var equipDexterityBonus = 0;
-var equipLuckBonus = 0;
-
-var equipAttackBonus = 0;
-var equipMagickAttackBonus = 0;
-var equipHitBonus = 0;
-var equipCritBonus = 0;
-var equipDefenseBonus = 0;
-var equipMagickDefenseBonus = 0;
-var equipFleeBonus = 0;
-var equipAttackSpeedBonus = 0;
-
-var skillStrenghtBonus = 0;
-var skillAgilityBonus = 0;
-var skillVitalityBonus = 0;
-var skillInteligenceBonus = 0;
-var skillDexterityBonus = 0;
-var skillLuckBonus = 0;
-
-var skillAttackBonus = 0;
-var skillMagickAttackBonus = 0;
-var skillHitBonus = 0;
-var skillCritBonus = 0;
-var skillDefenseBonus = 0;
-var skillMagickDefenseBonus = 0;
-var skillFleeBonus = 0;
-var skillAttackSpeedBonus = 0;
-
-var itemStrenghtBonus = 0;
-var itemAgilityBonus = 0;
-var itemVitalityBonus = 0;
-var itemInteligenceBonus = 0;
-var itemDexterityBonus = 0;
-var itemLuckBonus = 0;
-
-var itemAttackBonus = 0;
-var itemMagickAttackBonus = 0;
-var itemHitBonus = 0;
-var itemCritBonus = 0;
-var itemDefenseBonus = 0;
-var itemMagickDefenseBonus = 0;
-var itemFleeBonus = 0;
-var itemAttackSpeedBonus = 0;
-
-
-// itens
-var playerInventoryItem1 = {
-  name:'Apple',
-  quantity:2,
-  description:'A round, edible fruit that, when eaten once a day, keeps the doctor away.',
-  sellPrice: 1,
-  type: 'consumable',
-  effect: playerHealthPoint += (playerTotalHealthPoint * .08) // appleEffect();
+var currentMonster;
+var player = {
+  "name": "Random Adventurer",
+  "job": "Swordsman",
+  "level": 1,
+  "exp": 0,
+  "zeny": 100,
+  "currentHP": 100,
+  "maxHP": 100,
+  "currentSP": 50,
+  "maxSP": 50,
+  "stats": {
+    "strength": 10,
+    "agility": 10,
+    "vitality": 10,
+    "intelligence": 10,
+    "dexterity": 10,
+    "luck": 10
+  }
 }
+var expTable = [0, 550, 900, 1500, 2200, 3200, 3800, 4200, 4550, 5000, 5500,
+  6000, 6100, 6350, 6700, 7350, 8000, 8400, 8800, 9200, 9700, 10300, 11000,
+  11800, 13000, 14000, 15000, 16000, 17000, 18000, 19000, 20000, 21000, 22000,
+  23200, 24000, 26000, 27500, 29000, 30000, 31500, 33000, 34000, 36000, 37500,
+  38000, 40000, 42000, 44500, 47000, 49000, 51000, 53000, 55000, 59000, 61500,
+  61500, 63000, 65000, 67000, 69000, 70000, 73000, 77000, 80000, 84000, 88000,
+  91000, 95000, 110000, 128000, 140000, 155000, 163000, 170000, 180000, 188000,
+  195000, 200000, 230000, 260000, 300000, 350000, 400000, 480000, 550000, 600000,
+  680000, 750000, 900000, 1000000, 1200000, 1500000, 1800000, 2100000, 2400000,
+  2800000, 3300000, 4000000, 99999999];
 
-var playerInventoryItem2 = {
-  name:"Meat",
-  quantity:2,
-  description:"A leg of meat that's been cooked to near perfection.",
-  sellPrice: 3,
-  type: 'consumable',
-  effect: playerHealthPoint += (playerTotalHealthPoint * .15) // meatEffect();
-}
-
-var playerInventoryItem3 = {
-  name:"Red Potion",
-  quantity:1,
-  description:"A potion made from ground Red Herbs that restores HP.",
-  sellPrice: 5,
-  type: 'consumable',
-  effect: playerHealthPoint += (playerTotalHealthPoint * .25) // redPotionEffect();
-}
-
-var playerInventoryItem4 = {
-  name:"Blue Potion",
-  quantity:1,
-  description:"A potion made from ground Blue Herbs that restores 25% SP.",
-  sellPrice: 10,
-  type: 'consumable',
-  effect: playerSpecialPoint += (playerTotalSpecialPoint * .25) // bluePotionEffect();
-}
-
-var playerInventoryItem5 = {
-  name:"Green Potion",
-  quantity:1,
-  description:"A potion made from ground Green Herbs that restores Health.",
-  sellPrice: 7,
-  type: 'consumable',
-  effect: curePoison()
-}
-
-// equipment
-var playerInventoryEquip1 = {
-  name:"Adventurer's Suit",
-  quantity:1,
-  description:"A light, comfortable suit made just for young adventurers.",
-  sellPrice: 10,
-  type: 'body',
-  effect: equipDefense += 3
-}
-
-var playerInventoryEquip2 = {
-  name:"Knife",
-  quantity:1,
-  description:"A simple knife.",
-  sellPrice: 5,
-  type: 'one-hand',
-  effect: equipAttack += 3
-}
-
-var playerInventoryEquip3 = {
-  name:"Muffler",
-  quantity:1,
-  description:"A warm scarf that is worn around the neck and shoulders.",
-  sellPrice: 10,
-  type: 'garment',
-  effect: equipDefense += 3
-}
-
-// etc
-var playerInventoryEtc1 = {
-  name:"Jellopy",
-  quantity:6,
-  description:"A small crystallization created by some monsters.",
-  sellPrice: 3,
-  type: 'miscellaneous',
-  effect: ''
-}
-
-var playerInventoryEtc2 = {
-  name:"Garlet",
-  quantity:1,
-  description:"A small crystallization created by some monsters.",
-  sellPrice: 5,
-  type: 'miscellaneous',
-  effect: ''
-}
-
-var playerInventoryEtc3 = {
-  name:"Sticky Mucus",
-  quantity:3,
-  description:"Mysteriously sticky liquid.",
-  sellPrice: 8,
-  type: 'miscellaneous',
-  effect: ''
-}
-
-var playerInventoryEtc4 = {
-  name:"Empty Bottle",
-  quantity:2,
-  description:"An empty bottle that can be used for carrying liquid.",
-  sellPrice: 3,
-  type: 'miscellaneous',
-  effect: ''
-}
-
-var playerInventoryEtc5 = {
-  name:"Poring Card",
-  quantity:1,
-  description:"A small crystallization created by some monsters.",
-  sellPrice: 10,
-  type: 'card',
-  effect: playerLuck += 3
-}
-// --------------------------------------------
-
-// monster
-var monsterName = 'poring';
-var monsterLevel = 1;
-var monsterState = 'normal';
-var monsterElement = 'water';
-var monsterHealthPoint = 20;
-var monsterSpecialPoint = 5;
-var monsterAttackDelay = 1870;
-var monsterAttack = 5;
-var monsterDefense = 0 * .01 // percentage
-var monsterDodge = 10;
-var monsterExp = 5
-var monsterDrop = [
-  'apple',
-  'unriple apple',
-  'empty bottle',
-  'jellopy',
-  'sticky mucus',
-  'knife',
-  'poring card'
+var monsterDatabase = [
+    {
+  "id": 1002,
+  "name": "Poring",
+  "level": 1,
+  "element": "Water",
+  "hp": 20,
+  "sp": 5,
+  "attackDelay": 1870,
+  "attack": 5,
+  "defence": 0,
+  "dodge": 10,
+  "exp": 150,
+  "dropList": [
+    //ids de itens aqui dentro
+  ]
+},
+  {
+    "id": 1184,
+    "name": "Fabre",
+    "level": 1,
+    "element": "Earth",
+    "hp": 30,
+    "sp": 5,
+    "attackDelay": 1870,
+    "attack": 6,
+    "defence": 2,
+    "dodge": 8,
+    "exp": 181,
+    "dropList": [
+        //ids de itens aqui dentro
+    ]
+  },
 ]
 
+// --------------------------------------------
 
 initializer();
 
 function initializer() {
+  updatePlayerElements();
+  loadNewMonster();
   autoPlayInitializer();
 }
 
+function getMonster (id) {
+  return monsterDatabase.find(monster => monster.id === id);
+}
+
+function loadCurrentMonster (id) {
+  let monster = getMonster(id);
+
+  currentMonster = {
+    ...monster,
+    "currentHP": monster.hp};
+}
+
 function updateExp(amount) {
-    playerExperience += amount;
-    updateplayerExperience();
+    let currentMaxExp = getCurrentNextLevelExp();
+
+    player.exp += amount;
+
+    if (player.exp >= currentMaxExp) {
+      player.exp -= currentMaxExp;
+      player.level++;
+    }
+
+    updatePlayerElements();
 }
 
-function updateplayerExperience(){
-  document.getElementById("playerExperience").innerHTML = playerExperience;
+function updatePlayerExperience() {
+  document.getElementById("playerExperience").innerHTML = player.exp;
 }
 
-// atualiza o HP do monstro
-// function updateMonsterHealthPoint() {
-//   document.getElementById("MonsterHealthPoint").innerHTML = monsterHealthPoint;
-// }
-
-function updateElementCost(elementName, cost) {
-  document.getElementById(elementName).innerHTML = cost;
+function getCurrentNextLevelExp() {
+  return expTable[player.level];
 }
 
-function updateCursorCost() {
-  bonusMult += 1;
-  cursorCost = Math.round(cursorCost * 1.25);
-  totalBonus = bonusMult * bonusPlus;
-  updateElementCost("cursorCost", cursorCost);
-}
+function hitMonster() {
+    let playerAttackRandom = Math.round( Math.random() * ( Math.round( player.stats.strength * Math.random() ) ) );
 
-function buyCursor() {
-  if (playerExperience >= cursorCost) {
-    updateExp(-cursorCost);
-    updateCursorCost();
-  }
-}
 
-function updateAutoPlayCost() {
-  autoPlayPowerCost = Math.round(autoPlayPowerCost * 1.25);
-  autoPlayPower = autoPlayPower + 1;
-  updateElementCost("autoPlayPowerCost", autoPlayPowerCost);
-}
-
-function buyAutoPlay() {
-  if (playerExperience >= autoPlayPowerCost) {
-    updateExp(-autoPlayPowerCost);
-    updateAutoPlayCost();
-  }
-}
-
-function checkHit() {
-  if (playerHit > monsterDodge) {
-  return true;
-  }
-}
-
-function hitMonster(amount) {
-  let playerAttackRandom = Math.round( Math.random() * ( Math.round( playerAttack * Math.random() ) ) );
-
-  checkHit();
-
-  if (checkHit() === true) {
-    monsterHealthPoint -= playerAttackRandom - monsterDefense;
+    if(playerAttackRandom <= 0){
+      document.getElementById("logTextBox").innerHTML = "Miss!";
+    } else {
+      document.getElementById("logTextBox").innerHTML = "Hit for " + playerAttackRandom;
+    }
+    currentMonster.currentHP -= playerAttackRandom;
 
     changeMonsterAnimation('hit');
 
     setTimeout(function () {
       changeMonsterAnimation('normal');
     }, 100);
-  }
+
+    if(currentMonster.currentHP <= 0) {
+      updateExp(currentMonster.exp);
+      loadNewMonster();
+    }
+    updateMonsterCurrentHP();
+}
+
+function updateMonsterCurrentHP () {
+  document.getElementById("monsterHealthPoint").innerHTML = currentMonster.currentHP;
+}
+
+function loadNewMonster(){
+  //vai carregar sempre o mesmo, tem que mudar isso depois;
+  loadCurrentMonster(1002);
+  updateMonsterElements();
 
 }
 
 function changeMonsterAnimation(state) {
-  monsterState = state;
-  document.getElementById("monsterImg").setAttribute("src", "images/monster/" + monsterName + "-" + state + ".gif")
+  document.getElementById("monsterImg").setAttribute("src", "images/monster/" + currentMonster.name + "-" + state + ".gif")
+}
+
+function updatePlayerElements() {
+  updatePlayerExperience();
+  document.getElementById("playerExperienceToNextLevel").innerHTML = getCurrentNextLevelExp();
+  document.getElementById("playerLevel").innerHTML = player.level;
+}
+
+function updateMonsterElements() {
+  document.getElementById("monsterName").innerHTML = currentMonster.name;
+  document.getElementById("monsterLevel").innerHTML = currentMonster.level;
+  updateMonsterCurrentHP();
+  document.getElementById("monsterTotalHealthPoint").innerHTML = currentMonster.hp;
 }
 
 function autoPlayInitializer () {
   setInterval (function() {
-    playerExperience += autoPlayPower;
-    updateplayerExperience();
+    hitMonster();
   }, 1000); // 1000ms = 1 sec
 }
