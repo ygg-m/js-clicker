@@ -1,0 +1,98 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+* img {
+  image-rendering: pixelated;
+  display: inline-block;
+}
+
+.letter-spacing-1 {
+  letter-spacing: .5rem;
+}
+
+.hr::before,
+.hr::after {
+  content: '';
+  display: inline-block;
+  position: relative;
+  width: 30%;
+  height: 1px;
+  margin: 0 .5rem .3rem 0;
+  background: currentColor;
+  opacity: .5;
+}
+
+.click-button {
+  height: 16rem;
+}
+
+button.p-action {
+  height: 5rem;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+  font-weight: bolder;
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.inventory .btn {}
+
+.player-img {
+  width: 20rem;
+  transform: scale(1.5);
+}
+
+.container-monster {
+  min-height: 100vh;
+}
+
+.container-monster .img-monster {
+  min-height: 50vh;
+}
+
+.container-monster #monsterImg {
+  transform: scale(1.5);
+}
+
+.container-monster::before {
+  background: red;
+  width: 5rem;
+  height: 6rem;
+  display: block;
+  position: relative;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+}
+
+.col-attr {
+  width: 3rem;
+}
+
+.inventory .equipment .not-equipped {
+  filter: grayscale(1);
+  opacity: .3;
+  border-radius: .1rem;
+  border: .1rem solid transparent;
+  outline: .1rem solid #ccc;
+  transition: .2s;
+}
+
+.inventory .equipment .equipped {
+  border-radius: .1rem;
+  border: .1rem solid transparent;
+  outline: .1rem solid #212529;
+}
+
+.inventory .equipment .equipped-item {
+    cursor: pointer;
+}
+
+.inventory .equipment .not-equipped:hover  {
+    opacity: .6;
+}

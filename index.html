@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+
+  <!-- Meta Charset -->
+  <meta charset="utf-8">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Roboto:wght@100;300;400;900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome (Icons) -->
+  <script src="https://kit.fontawesome.com/64de45cbba.js" crossorigin="anonymous"></script>
+
+  <!-- Scripts  -->
+  <script type="text/javascript" src="script.js"></script>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+  <!-- Styles     -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- icon -->
+  <link rel="shortcut icon" href="images/icon.gif" type="image/x-icon">
+
+  <!-- Meta Infos about Page -->
+  <meta name="author" content="Ygor Goulart">
+  <meta name="description" content="I'm Ygor Goulart, a Web Developer who uses JavaScript learning new tricks and languages.">
+  <meta name="keywords" content="Ygor Goulart, Interactive Resume, Frontend, Web developer, Interactive CV, Resume, CV, Algorithms, HTML, CSS, Javascript, Node, React, MongoDB">
+  <meta name="robots" content="follow">
+  <meta name="revisit-after" content="15 days">
+
+
+
+
+  <title>Incremental Game | Ygor Goulart</title>
+</head>
+
+<body>
+
+  <!-- navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark font-monospace">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="images/logo-ro.png" alt="" height="24" class="d-inline-block align-text-top pe-1">
+        Clicker RO
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item px-2">
+            <a class="nav-link fs-2" aria-current="page" href="#"><i class="fa-brands fa-github"></i></a>
+          </li>
+          <li class="nav-item px-2">
+            <a href="#" class="nav-link mt-2">Save</a>
+          </li>
+          <li class="nav-item px-2">
+            <a href="#" class="nav-link mt-2">Load</a>
+          </li>
+          <li class="nav-item px-2">
+            <a href="#" class="nav-link mt-2">Reset</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- container geral -->
+  <div class="container-fluid">
+    <!-- container row -->
+    <div class="row">
+
+      <!-- container player -->
+      <div class="col container-player">
+
+        <!-- column infos -->
+        <div class="p-img-container row-12 mt-3">
+
+          <!-- image player -->
+          <div class="d-flex align-items-center justify-content-center bg-light overflow-hidden">
+            <img class="player-img" src="images/player/player-normal.gif" alt="">
+          </div>
+
+          <!-- info player   -->
+          <div class="mt-2 p-2 py-4 text-center bg-light">
+
+            <!-- main info -->
+            <div class="container-fluid">
+              <div class="row row-cols-2">
+
+                <div class="col-12">
+                  <div class="d-flex text-start">
+                    <div id="playerName" class="col fw-bold">Random Adventurer</div>
+                  </div>
+                </div>
+
+                <div class="col">
+                  <div class="d-flex text-start">
+                    <div class="col-4 fw-bold">Job</div>
+                    <div id="playerJob" class="col-8"><span>Swordman</span></div>
+                  </div>
+                </div>
+
+                <div class="col">
+                  <div class="d-flex text-start">
+                    <div class="col-4 fw-bold">Lvl</div>
+                    <div id="playerLevel" class="col-8"><span>7</span></div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <hr class="my-4">
+
+            <!-- main stats -->
+            <div class="container-fluid">
+              <div class="row row-cols-2">
+
+                <div class="col">
+                  <div class="d-flex text-start">
+                    <div class="col-4 fw-bold">HP</div>
+                    <div class="col-8"><span id="playerHealthPoint">100</span> / <span id="playerTotalHealthPoint">100</span></div>
+                  </div>
+                </div>
+
+                <div class="col">
+                  <div class="d-flex text-start">
+                    <div class="col-4 fw-bold">SP</div>
+                    <div class="col-8"><span id="playerSpecialPoint">50</span> / <span id="playerTotalSpecialPoint">50</span></div>
+                  </div>
+                </div>
+
+                <div class="col">
+                  <div class="d-flex text-start">
+                    <div class="col-4 fw-bold">Exp</div>
+                    <div class="col-8"><span id="playerExperience">0</span> / <span id="playerExperienceToNextLevel">15</span></div>
+                  </div>
+                </div>
+
+                <div class="col">
+                  <div class="d-flex text-start">
+                    <div class="col-4 fw-bold">Zeny</div>
+                    <div id="playerZeny" class="col-8">24</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <hr class="my-4">
+
+            <!-- main attributes -->
+            <div class="container-fluid">
+              <div class="row row-cols-2">
+
+                <div class="col">
+                  <div class="d-flex text-start">
+                    <div class="col-4 fw-bold">Str</div>
+                    <div class="col-8"><span id="playerStrenght">10</span> + <span id="playerStrenghtBonus">3</span></div>
+                  </div>
+                </div>
+
+                <div class="col">
+                  <div class="d-flex text-start">
+                    <div class="col-4 fw-bold">Agi</div>
+                    <div class="col-8"><span id="playerAglity">10</span> + <span id="playerAgilityBonus">3</span></div>
+                  </div>
+                </div>
+
+                <div class="col">
+                  <div class="d-flex text-start">
+                    <div class="col-4 fw-bold">Vit</div>
+                    <div class="col-8"><span id="playerVitality">10</span> + <span id="playerVitalityBonus">3</span></div>
+                  </div>
+                </div>
+
+                <div class="col">
+                  <div class="d-flex text-start">
+                    <div class="col-4 fw-bold">Int</div>
+                    <div class="col-8"><span id="playerInteligence">1</span><span id="playerInteligenceBonus"></span></div>
+                  </div>
+                </div>
+
+                <div class="col">
+                  <div class="d-flex text-start">
+                    <div class="col-4 fw-bold">Dex</div>
+                    <div class="col-8"><span id="playerDexterity">10</span> + <span id="playerDexterityBonus">3</span></div>
+                  </div>
+                </div>
+
+                <div class="col">
+                  <div class="d-flex text-start">
+                    <div class="col-4 fw-bold">Luk</div>
+                    <div class="col-8"><span id="playerLuck">10</span> + <span id="playerLuckBonus">3</span></div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <hr class="my-4">
+
+            <!-- side attributes -->
+            <div class="container-fluid">
+              <div class="row row-cols-2">
+
+                <div class="col">
+                  <div class="d-flex text-start">
+                    <div class="col-4 fw-bold">Atk</div>
+                    <div class="col-8"><span id="playerAttack">10</span></div>
+                  </div>
+                </div>
+
+                <div class="col">
+                  <div class="d-flex text-start">
+                    <div class="col-4 fw-bold">Crit</div>
+                    <div class="col-8"><span id="playerCrit">10</span></div>
+                  </div>
+                </div>
+
+                <div class="col">
+                  <div class="d-flex text-start">
+                    <div class="col-4 fw-bold">Matk</div>
+                    <div class="col-8"><span id="playerMagickAttack">10</span></div>
+                  </div>
+                </div>
+
+                <div class="col">
+                  <div class="d-flex text-start">
+                    <div class="col-4 fw-bold">Def</div>
+                    <div class="col-8"><span id="playerDefense">10</span></div>
+                  </div>
+                </div>
+
+                <div class="col">
+                  <div class="d-flex text-start">
+                    <div class="col-4 fw-bold">Hit</div>
+                    <div class="col-8"><span id="playerHit">10</span></div>
+                  </div>
+                </div>
+
+                <div class="col">
+                  <div class="d-flex text-start">
+                    <div class="col-4 fw-bold">Mdef</div>
+                    <div class="col-8"><span id="playerMagickDefense">10</span></div>
+                  </div>
+                </div>
+
+                <div class="col">
+                  <div class="d-flex text-start">
+                    <div class="col-4 fw-bold">Flee</div>
+                    <div class="col-8"><span id="playerFlee">10</span></div>
+                  </div>
+                </div>
+
+                <div class="col">
+                  <div class="d-flex text-start">
+                    <div class="col-4 fw-bold">Aspd</div>
+                    <div class="col-8"><span id="playerAttackSpeed">10</span></div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+      <!-- container monster -->
+      <div class="col container-monster">
+
+        <div class="row row-2 text-center justify-content-center">
+          <div class="d-flex align-items-center justify-content-center img-monster">
+            <div class="" onclick="hitMonster(totalBonus)" type="button" name="button"><img class="" id="monsterImg" src="images/monster/poring-normal.gif" alt=""></div>
+          </div>
+
+          <div class="row align-items-start justify-content-between" >
+            <div id="monsterName" class="col-2 h-100 p-2">Poring</div>
+            <div class="col-2 h-100 p-2">Level: <span id="monsterLevel">1</span></div>
+            <button onclick="useFlyWing()" class="btn btn-outline-secondary col-4" type="button" name="button"><img class="pe-1" src="images/item/fly-wing.gif" alt="">Flee</button>
+            <button onclick="runFromBattle()"class="btn btn-outline-secondary col-3" type="button" name="button"><img class="pe-1" src="images/item/bean-bag.gif" alt="">Run</button>
+          </div>
+
+
+          <div class="inventory">
+
+            <ul class="nav nav-pills mb-3 mt-3" id="pills-tab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true"><img src="images/item/apple.gif" alt=""> Item</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false"><img src="images/item/knife.gif" alt=""> Equip</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false"><img src="images/item/jellopy.gif" alt=""> Etc</button>
+              </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+
+              <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                <div class="container-fluid">
+                  <div class="row row-cols-2">
+
+                    <div class="col pb-2">
+                      <div class="d-flex text-start">
+                        <div class="col-2"> <img src="images/item/apple.gif" alt=""></div>
+                        <div class="col-2 fw-bold">x2</div>
+                        <div class="col-8">Apple</div>
+                      </div>
+                    </div>
+
+                    <div class="col pb-2">
+                      <div class="d-flex text-start">
+                        <div class="col-2"> <img src="images/item/meat.gif" alt=""></div>
+                        <div class="col-2 fw-bold">x2</div>
+                        <div class="col-8">Meat</div>
+                      </div>
+                    </div>
+
+                    <div class="col pb-2">
+                      <div class="d-flex text-start">
+                        <div class="col-2"> <img src="images/item/red-potion.gif" alt=""></div>
+                        <div class="col-2 fw-bold">x2</div>
+                        <div class="col-8">Red Potion</div>
+                      </div>
+                    </div>
+
+                    <div class="col pb-2">
+                      <div class="d-flex text-start">
+                        <div class="col-2"> <img src="images/item/blue-potion.gif" alt=""></div>
+                        <div class="col-2 fw-bold">x2</div>
+                        <div class="col-8">Blue Potion</div>
+                      </div>
+                    </div>
+
+                    <div class="col pb-2">
+                      <div class="d-flex text-start">
+                        <div class="col-2"> <img src="images/item/green-potion.gif" alt=""></div>
+                        <div class="col-2 fw-bold">x2</div>
+                        <div class="col-8">Green Potion</div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="equipment tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <div class="container-fluid">
+                  <div class="row row-cols">
+                    <p class="text-uppercase letter-spacing-1 hr opacity-50">equipped</p>
+                    <div class="col-2 pb-2 equipped-item">
+                      <img class="equipped" src="images/item/knife.gif" alt="">
+                    </div>
+                    <div class="col-2 pb-2 equipped-item">
+                      <img class="not-equipped" src="images/item/helm.gif" alt="">
+                    </div>
+                    <div class="col-2 pb-2 equipped-item">
+                      <img class="not-equipped" src="images/item/guard.gif" alt="">
+                    </div>
+                    <div class="col-2 pb-2 equipped-item">
+                      <img class="not-equipped" src="images/item/tunic.gif" alt="">
+                    </div>
+                    <div class="col-2 pb-2 equipped-item">
+                      <img class="not-equipped" src="images/item/muffler.gif" alt="">
+                    </div>
+                    <div class="col-2 pb-2 equipped-item">
+                      <img class="not-equipped" src="images/item/shoes.gif" alt="">
+                    </div>
+                    <hr class="my-3">
+
+                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                      <div class="container-fluid">
+                        <div class="row row-cols-2">
+
+                          <div class="col pb-2">
+                            <div class="d-flex text-start">
+                              <div class="col-2"> <img src="images/item/tunic.gif" alt=""></div>
+                              <div class="col-10">Tunic</div>
+                            </div>
+                          </div>
+
+                          <div class="col pb-2">
+                            <div class="d-flex text-start">
+                              <div class="col-2"> <img src="images/item/knife.gif" alt=""></div>
+                              <div class="col-10">Knife</div>
+                            </div>
+                          </div>
+
+                          <div class="col pb-2">
+                            <div class="d-flex text-start">
+                              <div class="col-2"> <img src="images/item/muffler.gif" alt=""></div>
+                              <div class="col-10">Muffler</div>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                <div class="container-fluid">
+                  <div class="row row-cols-2">
+
+                    <div class="col pb-2">
+                      <div class="d-flex text-start">
+                        <div class="col-2"> <img src="images/item/jellopy.gif" alt=""></div>
+                        <div class="col-2 fw-bold">x6</div>
+                        <div class="col-8">Jellopy</div>
+                      </div>
+                    </div>
+
+                    <div class="col pb-2">
+                      <div class="d-flex text-start">
+                        <div class="col-2"> <img src="images/item/garlet.gif" alt=""></div>
+                        <div class="col-2 fw-bold">x1</div>
+                        <div class="col-8">Garlet</div>
+                      </div>
+                    </div>
+
+                    <div class="col pb-2">
+                      <div class="d-flex text-start">
+                        <div class="col-2"> <img src="images/item/sticky-mucus.gif" alt=""></div>
+                        <div class="col-2 fw-bold">x3</div>
+                        <div class="col-8">Sticky Mucus</div>
+                      </div>
+                    </div>
+
+                    <div class="col pb-2">
+                      <div class="d-flex text-start">
+                        <div class="col-2"> <img src="images/item/empty-bottle.gif" alt=""></div>
+                        <div class="col-2 fw-bold">x2</div>
+                        <div class="col-8">Empty Bottle</div>
+                      </div>
+                    </div>
+
+                    <div class="col pb-2">
+                      <div class="d-flex text-start">
+                        <div class="col-2"> <img src="images/item/card.gif" alt=""></div>
+                        <div class="col-2 fw-bold">x1</div>
+                        <div class="col-8">Poring Card</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+
+            </div>
+
+
+          </div>
+        </div>
+
+        <script type="module">
+          import {
+            Toast
+          } from 'bootstrap.esm.min.js'
+
+          Array.from(document.querySelectorAll('.toast'))
+            .forEach(toastNode => new Toast(toastNode))
+        </script>
+        <script type="text/javascript" src="script.js"></script>
+
+</body>
+
+</html>
