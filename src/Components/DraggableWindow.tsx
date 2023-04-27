@@ -43,12 +43,13 @@ export const DraggableWindow = ({ title, children }: Props) => {
     <div
       className="absolute grid w-full max-w-md overflow-hidden rounded-lg bg-gray-50 text-gray-800 shadow-2xl outline outline-1 outline-gray-800"
       style={{ top: position.y, left: position.x }}
+      ref={ref}
+    >
+      <MenuHeader name={title} 
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
-      ref={ref}
-    >
-      <MenuHeader name={title} />
+      />
       <div className="">{children}</div>
     </div>
   );
