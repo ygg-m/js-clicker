@@ -9,7 +9,7 @@ export interface CurrentTypes {
 export const CurrentDefault = {
   enemy: {
     id: 1002,
-    healthPoints: 10,
+    healthPoints: 50,
   },
   map: { id: 0, enemiesDefeated: 0 },
 };
