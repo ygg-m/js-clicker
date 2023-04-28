@@ -109,7 +109,7 @@ function getWeaponRefinementBonus(
   return bonus;
 }
 
-interface getStatusMATKProps {
+interface getStatusMATKTypes {
   baseLevel: number,
   int: number,
   dex: number,
@@ -121,7 +121,7 @@ export function getStatusMATK({
   int: int,
   dex: dex,
   luk: luk,
-}: getStatusMATKProps) {
+}: getStatusMATKTypes) {
   const result = Math.floor(Math.floor(baseLevel / 4) + int + Math.floor(int / 2) + Math.floor(dex / 5) + Math.floor(luk / 3))
 
   return result
@@ -145,3 +145,14 @@ export function getWeaponMATK({
   return result
 }
 
+interface getSoftDefenseTypes {
+  vit: number, agi: number, baseLevel: number
+}
+
+export function getSoftDefense({
+  vit: vit, agi: agi, baseLevel: baseLevel
+}: getSoftDefenseTypes) {
+  const result = Math.floor((vit / 2) + (agi / 5) + (baseLevel / 2))
+
+  return result
+}

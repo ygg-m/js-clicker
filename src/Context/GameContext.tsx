@@ -1,5 +1,5 @@
 import { ClickDefault, CountDefault, CurrentDefault } from "@/Data/DefaultValues";
-import { getStatusATK, getStatusMATK } from "@/Helpers/getStats";
+import { getSoftDefense, getStatusATK, getStatusMATK } from "@/Helpers/getStats";
 import {
   ClickTypes,
   CountTypes,
@@ -39,6 +39,7 @@ export const GameProvider: React.FC<GameContextProps> = ({ children }) => {
   function updateStats() {
     updateSubStat_Attack()
     updateSubStat_MagicAttack()
+    updateSubStat_SoftDefense()
   }
 
   function updateSubStat_Attack() {
@@ -83,6 +84,32 @@ export const GameProvider: React.FC<GameContextProps> = ({ children }) => {
         sideStats: {
           ...current.character.stats.sideStats,
           magicAttack: result
+        }
+        
+      }
+      }
+    })
+  }
+
+  // TODO: add hard def
+  // https://irowiki.org/wiki/DEF#Hard_DEF
+
+  function updateSubStat_SoftDefense() {
+    const result = getSoftDefense({
+      baseLevel: current.character.baseLevel,
+      vit: current.character.stats.mainStats.vitality,
+      agi: current.character.stats.mainStats.agility,
+    })
+
+    setCurrent({
+      ...current,
+      character: {
+        ...current.character,
+      stats: {
+        ...current.character.stats,
+        sideStats: {
+          ...current.character.stats.sideStats,
+          defense: result
         }
         
       }
