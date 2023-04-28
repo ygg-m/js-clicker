@@ -108,3 +108,21 @@ function getWeaponATK_RefinementBonus(
 
   return bonus;
 }
+
+interface getStatusMATKProps {
+  baseLevel: number,
+  int: number,
+  dex: number,
+  luk: number,
+}
+
+export function getStatusMATK({
+  baseLevel: baseLevel,
+  int: int,
+  dex: dex,
+  luk: luk,
+}: getStatusMATKProps) {
+  const result = Math.floor(Math.floor(baseLevel / 4) + int + Math.floor(int / 2) + Math.floor(dex / 5) + Math.floor(luk / 3))
+
+  return result
+}

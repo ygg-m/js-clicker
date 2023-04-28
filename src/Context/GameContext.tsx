@@ -1,5 +1,5 @@
 import { ClickDefault, CountDefault, CurrentDefault } from "@/Data/DefaultValues";
-import { getStatusATK } from "@/Helpers/getStats";
+import { getStatusATK, getStatusMATK } from "@/Helpers/getStats";
 import {
   ClickTypes,
   CountTypes,
@@ -38,6 +38,7 @@ export const GameProvider: React.FC<GameContextProps> = ({ children }) => {
 
   function updateStats() {
     updateSubStat_Attack()
+    updateSubStat_MagicAttack()
   }
 
   function updateSubStat_Attack() {
@@ -58,6 +59,30 @@ export const GameProvider: React.FC<GameContextProps> = ({ children }) => {
         sideStats: {
           ...current.character.stats.sideStats,
           attack: result
+        }
+        
+      }
+      }
+    })
+  }
+
+  function updateSubStat_MagicAttack() {
+    const result = getStatusMATK({
+      baseLevel: current.character.baseLevel,
+      int: current.character.stats.mainStats.intelligence,
+      dex: current.character.stats.mainStats.dexterity,
+      luk: current.character.stats.mainStats.luck,
+    })
+
+    setCurrent({
+      ...current,
+      character: {
+        ...current.character,
+      stats: {
+        ...current.character.stats,
+        sideStats: {
+          ...current.character.stats.sideStats,
+          magicAttack: result
         }
         
       }
