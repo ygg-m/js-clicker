@@ -21,8 +21,8 @@ export function getStatusATK({
     weaponClass === "Instrument" ||
     weaponClass === "Whip";
 
-  if (isDexWeapon) return baseLevel / 4 + str / 5 + dex + luk / 3;
-  else return baseLevel / 4 + str + dex / 5 + luk / 3;
+  if (isDexWeapon) return Math.floor(baseLevel / 4 + str / 5 + dex + luk / 3);
+  else return Math.floor(baseLevel / 4 + str + dex / 5 + luk / 3);
 }
 
 interface getWeaponATKTypes {

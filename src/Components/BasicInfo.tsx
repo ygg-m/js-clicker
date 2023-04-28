@@ -1,7 +1,7 @@
 import { useGame } from "@/Context/GameContext";
 import { baseExpTable, firstJobExpTable } from "@/Data/ExperienceTables";
 import { jobList } from "@/Data/Jobs";
-import { JobData } from "@/Types/GameTypes";
+import { JobData } from "@/Types/Job";
 import { DraggableWindow } from "./DraggableWindow";
 import { GrayButton } from "./GrayButton";
 import { MenuHeader } from "./MenuHeader";

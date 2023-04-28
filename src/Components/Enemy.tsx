@@ -1,7 +1,6 @@
 import { useGame } from "@/Context/GameContext";
 import { enemyList } from "@/Data/EnemyList";
-import { EnemyTypes } from "@/Types/GameTypes";
-import {useState} from "react"
+import { EnemyTypes } from "@/Types/Enemy/Base";
 
 export const Enemy = () => {
   const {current} = useGame()

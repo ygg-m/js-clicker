@@ -1,10 +1,11 @@
 import { ClickDefault, CountDefault, CurrentDefault } from "@/Data/DefaultValues";
+import { getStatusATK } from "@/Helpers/getStats";
 import {
   ClickTypes,
   CountTypes,
   CurrentTypes,
 } from "@/Types/GameTypes";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 type GameContextType = {
   click: ClickTypes;
@@ -24,9 +25,9 @@ const GameContext = createContext<GameContextType>({
 
 export const useGame = () => useContext(GameContext);
 
-type CharacterContextProps = { children: React.ReactNode };
+type GameContextProps = { children: React.ReactNode };
 
-export const GameProvider: React.FC<CharacterContextProps> = ({ children }) => {
+export const GameProvider: React.FC<GameContextProps> = ({ children }) => {
   const [click, setClick] = useState<ClickTypes>(ClickDefault);
   const [count, setCount] = useState<CountTypes>(CountDefault);
   const [current, setCurrent] = useState<CurrentTypes>(CurrentDefault);
@@ -35,8 +36,33 @@ export const GameProvider: React.FC<CharacterContextProps> = ({ children }) => {
     
   }
 
-  function getSubStat_Attack() {
+  function updateStats() {
+    updateSubStat_Attack()
+  }
+
+  function updateSubStat_Attack() {
+    const result = getStatusATK({
+      weaponClass: current.character.equipment.handR?.subtype || "",
+      baseLevel: current.character.baseLevel,
+      str: current.character.stats.mainStats.strength,
+      dex: current.character.stats.mainStats.dexterity,
+      luk: current.character.stats.mainStats.luck,
+    })
     
+    setCurrent({
+      ...current,
+      character: {
+        ...current.character,
+      stats: {
+        ...current.character.stats,
+        sideStats: {
+          ...current.character.stats.sideStats,
+          attack: result
+        }
+        
+      }
+      }
+    })
   }
 
   function addClickPowerToCountPoints() {
@@ -56,6 +82,10 @@ export const GameProvider: React.FC<CharacterContextProps> = ({ children }) => {
       power: click.power + num,
     });
   }
+
+  useEffect(() => {
+    updateStats()
+  }, [])
 
   const value: GameContextType = {
     click,
