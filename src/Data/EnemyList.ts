@@ -1,4 +1,4 @@
-import PoringIdle from "@/Assets/Enemy/Idle/1002.gif";
+// import PoringIdle from "@/Assets/Enemy/Idle/1002.gif";
 
 export const enemyList = [
   {
@@ -9,36 +9,36 @@ export const enemyList = [
     property: "Water 1",
     size: "Medium",
     maps: [
-        {
-            mapID: 0
-            ammount: 80,
-        }
-    ]
-    mode: [
-        "Looter"
-    ]
+      {
+        mapID: 0,
+        ammount: 80,
+      },
+    ],
+    mode: ["Looter"],
     sprites: {
-      idle: PoringIdle,
-      attack: PoringIdle,
-      receiveDamage: PoringIdle,
-      death: PoringIdle,
+      idle: require("@/Assets/Enemy/Idle/1002.gif"),
+      attack: require("@/Assets/Enemy/Idle/1002.gif"),
+      receiveDamage: require("@/Assets/Enemy/Idle/1002.gif"),
+      death: require("@/Assets/Enemy/Idle/1002.gif"),
     },
-    baseStats: {
-      healthPoints: 50,
-      hitRateNeededTo100: 22,
-      fleeRateNeededTo95: 82,
-      attackDelay: 1.87,
-      attack: 8,
-      defense: 0,
-      magicDefense: 5,
-    },
-    mainStats: {
-      strength: 1,
-      inteligence: 0,
-      agility: 1,
-      dexterity: 1,
-      vitality: 6,
-      luck: 30,
+    stats: {
+      mainStats: {
+        strength: 1,
+        inteligence: 0,
+        agility: 1,
+        dexterity: 1,
+        vitality: 6,
+        luck: 30,
+      },
+      baseStats: {
+        healthPoints: 50,
+        hitRateNeededTo100: 22,
+        fleeRateNeededTo95: 82,
+        attackDelay: 1.87,
+        attack: 8,
+        defense: 0,
+        magicDefense: 5,
+      },
     },
     rewards: {
       baseExperience: 60,
@@ -79,20 +79,10 @@ export const enemyList = [
       ],
     },
     skills: [
-        {
-            
-  id: 1,
-  name: "Water Attribute Attack",
-  type: "Passive",
-  level: 1,
-  levelTotal: 10,
-  requiredlevel: null,
-  requiredSkill: null,
-  requiredItem: null,
-  script: [
-    ElementalAtk("Water")
-  ],
-        }
+      {
+        skillID: 1,
+        level: 1,
+      },
     ],
   },
 ];

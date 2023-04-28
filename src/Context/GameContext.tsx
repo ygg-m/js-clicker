@@ -1,16 +1,15 @@
+import { ClickDefault, CountDefault, CurrentDefault } from "@/Data/DefaultValues";
 import {
-  ClickDefault,
   ClickTypes,
-  CountDefault,
   CountTypes,
   CurrentTypes,
-  CurrentDefault,
 } from "@/Types/GameTypes";
 import { createContext, useContext, useState } from "react";
 
 type GameContextType = {
   click: ClickTypes;
   count: CountTypes;
+  current: CurrentTypes;
   handleClickerButton: Function;
   powerUpClick: Function;
 };
@@ -18,6 +17,7 @@ type GameContextType = {
 const GameContext = createContext<GameContextType>({
   click: ClickDefault,
   count: CountDefault,
+  current: CurrentDefault,
   handleClickerButton: () => {},
   powerUpClick: () => {},
 });
@@ -30,6 +30,10 @@ export const GameProvider: React.FC<CharacterContextProps> = ({ children }) => {
   const [click, setClick] = useState<ClickTypes>(ClickDefault);
   const [count, setCount] = useState<CountTypes>(CountDefault);
   const [current, setCurrent] = useState<CurrentTypes>(CurrentDefault);
+
+  function basicAttack() {
+    
+  }
 
   function addClickPowerToCountPoints() {
     setCount({
@@ -52,6 +56,7 @@ export const GameProvider: React.FC<CharacterContextProps> = ({ children }) => {
   const value: GameContextType = {
     click,
     count,
+    current,
     handleClickerButton,
     powerUpClick,
   };

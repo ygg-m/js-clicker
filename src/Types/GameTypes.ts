@@ -4,37 +4,21 @@ export interface CurrentTypes {
     healthPoints: number;
   };
   map: { id: number; enemiesDefeated: number };
+  character: Character;
 }
-
-export const CurrentDefault = {
-  enemy: {
-    id: 1002,
-    healthPoints: 50,
-  },
-  map: { id: 0, enemiesDefeated: 0 },
-};
 
 export interface ClickTypes {
   power: number;
 }
-
-export const ClickDefault = {
-  power: 1,
-};
 
 export interface CountTypes {
   clicks: number;
   points: number;
 }
 
-export const CountDefault = {
-  clicks: 0,
-  points: 0,
-};
-
 export interface Character {
   name: string;
-  job: CharJob;
+  job: number;
   baseLevel: number;
   baseExp: number;
   jobLevel: number;
@@ -42,34 +26,21 @@ export interface Character {
   equipment: CharEquipment;
   stats: CharStats;
   statPoints: number;
-  skills: CharSkills;
+  skills: CharSkill[];
   skillPoints: number;
 }
 
-export interface CharJob {
-  name: string;
-  statsBonus: {
-    strenght: number;
-    agility: number;
-    vitality: number;
-    intelligence: number;
-    dexterity: number;
-    luck: number;
-  };
-  baseSkills: [];
-}
-
 export interface CharEquipment {
-  headTop: Item;
-  headMid: Item;
-  headBottom: Item;
-  body: Item;
-  handR: Item;
-  handL: Item;
-  robe: Item;
-  shoes: Item;
-  accessoryR: Item;
-  accessoryL: Item;
+  headTop: ItemTypes | null;
+  headMid: ItemTypes | null;
+  headBottom: ItemTypes | null;
+  body: ItemTypes | null;
+  handR: ItemTypes | null;
+  handL: ItemTypes | null;
+  robe: ItemTypes | null;
+  shoes: ItemTypes | null;
+  accessoryR: ItemTypes | null;
+  accessoryL: ItemTypes | null;
 }
 
 export interface CharStats {
@@ -110,9 +81,9 @@ export interface CharStats {
   };
 }
 
-export interface CharSkills {
-  skillList: Skill[];
-  aquiredSkills: Skill[];
+export interface CharSkill {
+  skillID: number;
+  acquiredLevel: number;
 }
 
 export interface Skill {
@@ -123,19 +94,32 @@ export interface Skill {
   levelTotal: number;
   requiredlevel: number;
   requiredSkill: Skill;
-  requiredItem: Item;
+  requiredItem: ItemTypes;
   script: Function[];
 }
 
-export interface Item {
-  id: number;
-  name: string;
-  type: string;
-  equipSlot: string;
-  script: Function[];
+export interface ItemTypes {
+  id: number,
+  portrait: string,
+  sprite: string,
+  name: string,
+  description: string,
+  type: string,
+  subtype: string,
+  location: string,
+  attack: number,
+  defense: number,
+  property: string,
+  weight: number,
+  weaponLevel: number,
+  requiresLevel: number,
+  buy: number,
+  sell: number,
+  usableBy: string[],
+  script: Function[],
 }
 
-export interface Enemy {
+export interface EnemyTypes {
   id: number;
   name: string;
   level: number;
@@ -154,7 +138,7 @@ export interface Enemy {
     jobExperience: number;
     itemDrops: EnemyDrop[];
   };
-  skills: Skill[];
+  skills: EnemySkill[];
 }
 
 export interface EnemyStats {
@@ -178,6 +162,25 @@ export interface EnemyStats {
 }
 
 export interface EnemyDrop {
-  itemID: Item;
+  itemID: number;
   chance: number;
+}
+
+export interface EnemySkill {
+  skillID: number;
+  level: number;
+}
+
+export interface JobData {
+  id: number,
+  name: string,
+  statsBonus: {
+    strenght: number,
+    agility: number,
+    vitality: number,
+    intelligence: number,
+    dexterity: number,
+    luck: number,
+  },
+  baseSkills: CharSkill[],
 }

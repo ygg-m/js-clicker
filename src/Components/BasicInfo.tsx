@@ -1,3 +1,7 @@
+import { useGame } from "@/Context/GameContext";
+import { baseExpTable, firstJobExpTable } from "@/Data/ExperienceTables";
+import { jobList } from "@/Data/Jobs";
+import { JobData } from "@/Types/GameTypes";
 import { DraggableWindow } from "./DraggableWindow";
 import { GrayButton } from "./GrayButton";
 import { MenuHeader } from "./MenuHeader";
@@ -45,7 +49,7 @@ const Level = ({ name, value, exp, expToLevel }: LevelProps) => {
   const percentage = Math.floor((exp / expToLevel) * 100);
 
   return (
-    <div className="grid grid-cols-[.4fr_1fr] items-center gap-2">
+    <div className="grid grid-cols-[.4fr_1fr] items-center gap-2 hover:bg-gray-300 tooltip" data-tip={`${exp} / ${expToLevel} (${percentage}%)`}>
       <div>
         {name} Lv. {value}
       </div>
@@ -79,6 +83,13 @@ const Zeny = ({ value }: { value: number }) => {
 };
 
 export const BasicInfo = () => {
+  const {name, job, baseLevel, baseExp, jobLevel, jobExp} = useGame().current.character
+  const {healthPoints, spiritPoints, totalHealthPoints, totalSpiritPoints, weight, totalWeight, zeny} = useGame().current.character.stats.baseStats
+
+  const { name: jobName } = jobList.find(e => e.id === job) as JobData || "Unknown"
+  const baseExpToLevel = baseExpTable[baseLevel]
+  const jobExpToLevel = firstJobExpTable[jobLevel]
+
   return (
     <section className="grid w-full max-w-md overflow-hidden rounded-lg bg-gray-50 text-gray-800 outline outline-1 outline-gray-800">
       <DraggableWindow title="Basic Info"> 
@@ -86,26 +97,26 @@ export const BasicInfo = () => {
         <div className="flex flex-col">
           <div className="grid grid-cols-[0.5fr_1fr] gap-2 p-1 px-3">
             <div className="flex flex-col text-sm">
-              <span>Ygg M'oraes</span>
-              <span>Knight</span>
+              <span>{name}</span>
+              <span>{jobName}</span>
             </div>
 
             <div className="grid gap-1 text-sm">
-              <Parameter name="HP" value={3742} totalValue={3742} />
-              <Parameter name="SP" value={68} totalValue={181} />
+              <Parameter name="HP" value={healthPoints} totalValue={totalHealthPoints} />
+              <Parameter name="SP" value={spiritPoints} totalValue={totalSpiritPoints} />
             </div>
           </div>
 
           <div className="p-1 px-2 text-sm">
             <div className="rounded-lg bg-gray-200 p-1 px-2">
-              <Level name="Base" value={60} exp={3500} expToLevel={15000} />
-              <Level name="Job" value={30} exp={640} expToLevel={30000} />
+              <Level name="Base" value={baseLevel} exp={baseExp} expToLevel={baseExpToLevel} />
+              <Level name="Job" value={jobLevel} exp={jobExp} expToLevel={jobExpToLevel} />
             </div>
           </div>
 
           <div className="bg-lines border-t border-gray-400 p-1 px-3 text-sm">
-            <Weight value={1110} totalValue={3580} />
-            <Zeny value={20101} />
+            <Weight value={weight} totalValue={totalWeight} />
+            <Zeny value={zeny} />
           </div>
         </div>
         <div className="bg-lines grid grid-cols-2 gap-2 border-l border-gray-400 p-2 text-sm">
