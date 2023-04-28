@@ -19,7 +19,7 @@ export const MenuHeader = ({
 }: Props) => {
   return (
     <header
-      className="bg-menu-header flex cursor-grab items-center justify-between gap-2 border-b border-gray-800 p-1 px-3"
+      className="bg-menu-header flex cursor-grab items-center justify-between gap-2 border-b border-gray-800 p-[2px] px-3"
       onMouseDown={onMouseDown}
       onMouseMove={onMouseMove}
       onMouseUp={onMouseUp}

@@ -91,7 +91,7 @@ export const BasicInfo = () => {
   const jobExpToLevel = firstJobExpTable[jobLevel]
 
   return (
-      <DraggableWindow title="Basic Info"> 
+      <DraggableWindow title="Basic Info" originX={0} originY={0}> 
         <article className="grid grid-cols-[1fr_0.5fr]">
           <div className="flex flex-col">
             <div className="grid grid-cols-[0.5fr_1fr] gap-2 p-1 px-3">

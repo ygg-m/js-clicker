@@ -3,12 +3,14 @@ import { MenuHeader } from "./MenuHeader";
 
 interface Props extends React.PropsWithChildren<{}> {
   title: string;
+  originX: number,
+  originY: number,
 }
 
-export const DraggableWindow = ({ title, children }: Props) => {
+export const DraggableWindow = ({ title, originX, originY, children }: Props) => {
   const [isDragging, setIsDragging] = useState(false);
-  const [origin, setOrigin] = useState({ x: 0, y: 0 });
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [origin, setOrigin] = useState({ x: originX, y: originY });
+  const [position, setPosition] = useState({ x: originX, y: originY });
   const ref = useRef<HTMLDivElement>(null);
 
   const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
