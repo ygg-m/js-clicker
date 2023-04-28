@@ -149,8 +149,7 @@ interface getSoftDefenseTypes {
   vit: number, agi: number, baseLevel: number
 }
 
-// TODO: add bonuses 
-// https://irowiki.org/wiki/DEF#Soft_DEF
+// TODO: add bonuses >> https://irowiki.org/wiki/DEF#Soft_DEF
 
 export function getSoftDefense({
   vit: vit, agi: agi, baseLevel: baseLevel
@@ -160,23 +159,40 @@ export function getSoftDefense({
   return result
 }
 
-interface getSoftMagicDefenseProps {
+interface getSoftMagicDefenseTypes {
   baseLevel: number,
   int: number,
   vit: number,
   dex: number,
 }
 
-// TODO: add bonuses 
-// https://irowiki.org/wiki/MDEF#Soft_MDEF
+// TODO: add bonuses >> https://irowiki.org/wiki/MDEF#Soft_MDEF
 
 export function getSoftMagicDefense({
   baseLevel: baseLevel,
   int: int,
   vit: vit,
   dex: dex,
-}: getSoftMagicDefenseProps) {
+}: getSoftMagicDefenseTypes) {
   const result = Math.floor(int + (vit / 5) + (dex / 5) + (baseLevel / 4))
+
+  return result
+}
+
+interface getHitRateTypes {
+  baseLevel: number;
+  dex: number;
+  luk: number;
+}
+
+// TODO: add bonuses >> https://irowiki.org/wiki/Stats#HIT
+
+export function getHitRate({
+  baseLevel: baseLevel,
+  dex: dex,
+  luk: luk,
+}: getHitRateTypes) {
+  const result = 175 + baseLevel + dex + Math.floor(luk / 3)
 
   return result
 }
