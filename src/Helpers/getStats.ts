@@ -149,10 +149,34 @@ interface getSoftDefenseTypes {
   vit: number, agi: number, baseLevel: number
 }
 
+// TODO: add bonuses 
+// https://irowiki.org/wiki/DEF#Soft_DEF
+
 export function getSoftDefense({
   vit: vit, agi: agi, baseLevel: baseLevel
 }: getSoftDefenseTypes) {
   const result = Math.floor((vit / 2) + (agi / 5) + (baseLevel / 2))
+
+  return result
+}
+
+interface getSoftMagicDefenseProps {
+  baseLevel: number,
+  int: number,
+  vit: number,
+  dex: number,
+}
+
+// TODO: add bonuses 
+// https://irowiki.org/wiki/MDEF#Soft_MDEF
+
+export function getSoftMagicDefense({
+  baseLevel: baseLevel,
+  int: int,
+  vit: vit,
+  dex: dex,
+}: getSoftMagicDefenseProps) {
+  const result = Math.floor(int + (vit / 5) + (dex / 5) + (baseLevel / 4))
 
   return result
 }
