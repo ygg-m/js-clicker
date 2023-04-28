@@ -35,6 +35,10 @@ export const GameProvider: React.FC<CharacterContextProps> = ({ children }) => {
     
   }
 
+  function getSubStat_Attack() {
+    
+  }
+
   function addClickPowerToCountPoints() {
     setCount({
       ...count,

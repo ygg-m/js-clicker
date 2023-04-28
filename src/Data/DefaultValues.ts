@@ -28,22 +28,27 @@
       weight: 0,
       totalWeight: 2030,
       zeny: 1000,
+      bonus: {
+        totalHealthPoints: 0,
+        totalSpiritPoints: 0,
+        totalWeight: 0,
+      }
     },
     mainStats: {
-      strenght: 1,
+      strength: 1,
       agility: 1,
       vitality: 1,
       intelligence: 1,
       dexterity: 1,
       luck: 1,
-    },
-    requiredPointsToLevel: {
-      strenght: 2,
-      agility: 2,
-      vitality: 2,
-      intelligence: 2,
-      dexterity: 2,
-      luck: 2,
+      bonus: {
+        strength: 0,
+        agility: 0,
+        vitality: 0,
+        intelligence: 0,
+        dexterity: 0,
+        luck: 0,
+      }
     },
     sideStats: {
       attack: 1,
@@ -54,13 +59,23 @@
       magicDefense: 0,
       fleeRate: 2,
       attackSpeed: 150,
+      bonus: {
+        attack: 0,
+        magicAttack: 0,
+        hitRate: 0,
+        critRate: 0,
+        defense: 0,
+        magicDefense: 0,
+        fleeRate: 0,
+        attackSpeed: 0,
+      }
     },
   }
 
   export const CharJobDefault = {
     name: "Novice",
     statsBonus: {
-      strenght: 0,
+      strength: 0,
       agility: 0,
       vitality: 0,
       intelligence: 0,

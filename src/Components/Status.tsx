@@ -1,4 +1,5 @@
 import { ArrowIcon } from "@/Assets/UI";
+import { useGame } from "@/Context/GameContext";
 import { getBaseStatCost } from "@/Helpers/getBaseStatCost";
 import { DraggableWindow } from "./DraggableWindow";
 
@@ -18,7 +19,7 @@ const BaseStat = ({
   const levelUpCost = getBaseStatCost(value);
 
   return (
-    <div className="grid grid-cols-[1.5rem_1fr] gap-2">
+    <div className="grid grid-cols-[1.8rem_1fr] gap-2">
       <div className="font-bold text-blue-700">{name}</div>
       <div className="grid grid-cols-[1fr_1.5rem_1.5rem] items-center border border-gray-400 bg-gray-200 px-1 text-sm">
         <div className="flex gap-1">
@@ -59,38 +60,40 @@ const SubStat = ({name, value, bonusValue}:SubStatProps) => {
 }
 
 export const Status = () => {
+  const { mainStats, sideStats } = useGame().current.character.stats
+  const {strength, agility, vitality, intelligence, dexterity, luck, bonus} = mainStats
+  const {attack, magicAttack, hitRate, critRate, defense, magicDefense, fleeRate, attackSpeed} = sideStats
   return (
     <section className="grid w-full max-w-md overflow-hidden rounded-lg bg-gray-50 text-gray-800 outline outline-1 outline-gray-800">
       <DraggableWindow title="Status" originX={0} originY={215}>
-        <article className="grid grid-cols-[1fr_.8fr_.8fr] grid-rows-6 gap-2 p-2">
-            <BaseStat name="Str" value={99} bonusValue={50} levelUpAvailable />
-            <SubStat name="Atk" value={1} bonusValue={0} />
-            <SubStat name="Def" value={1} bonusValue={0} />
+        <article className="grid grid-cols-[1fr_.8fr_.8fr] grid-rows-6 gap-2 p-2 px-3">
+            <BaseStat name="Str" value={strength} bonusValue={bonus.strength} levelUpAvailable />
+            <SubStat name="Atk" value={attack} bonusValue={sideStats.bonus.attack} />
+            <SubStat name="Def" value={defense} bonusValue={sideStats.bonus.defense} />
 
-            <BaseStat name="Agi" value={1} bonusValue={0} />
-            <SubStat name="Matk" value={1} bonusValue={0} />
-            <SubStat name="Mdef" value={1} bonusValue={0} />
+            <BaseStat name="Agi" value={agility} bonusValue={bonus.agility} />
+            <SubStat name="Matk" value={magicAttack} bonusValue={sideStats.bonus.magicAttack} />
+            <SubStat name="Mdef" value={magicDefense} bonusValue={sideStats.bonus.magicDefense} />
 
-            <BaseStat name="Vit" value={1} bonusValue={0} />
-            <SubStat name="Hit" value={1} bonusValue={0} />
-            <SubStat name="Flee" value={1} bonusValue={0} />
+            <BaseStat name="Vit" value={vitality} bonusValue={bonus.vitality} />
+            <SubStat name="Hit" value={hitRate} bonusValue={sideStats.bonus.hitRate} />
+            <SubStat name="Flee" value={fleeRate} bonusValue={sideStats.bonus.fleeRate} />
 
-            <BaseStat name="Int" value={1} bonusValue={0} />
-            <SubStat name="Critical" value={1} bonusValue={0} />
-            <SubStat name="Aspd" value={1} bonusValue={0} />
+            <BaseStat name="Int" value={intelligence} bonusValue={bonus.intelligence} />
+            <SubStat name="Critical" value={critRate} bonusValue={sideStats.bonus.critRate} />
+            <SubStat name="Aspd" value={attackSpeed} bonusValue={sideStats.bonus.attackSpeed} />
 
-            <BaseStat name="Dex" value={1} bonusValue={0} />
+            <BaseStat name="Dex" value={dexterity} bonusValue={bonus.dexterity} />
             <div className="col-span-2" />
 
-            <BaseStat name="Luk" value={1} bonusValue={0} />
+            <BaseStat name="Luk" value={luck} bonusValue={bonus.luck} />
             <div className="col-span-2">
-            <div className="flex justify-between border-b border-gray-400">
-      <div className="font-bold text-blue-700">Status Point</div>
-        <span>48</span>
-    </div>
+              <div className="flex justify-between border-b border-gray-400">
+                <div className="font-bold text-blue-700">Status Point</div>
+                <span>48</span>
               </div>
+            </div>
 
-          <div></div>
         </article>
       </DraggableWindow>
     </section>

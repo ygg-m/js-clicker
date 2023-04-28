@@ -52,22 +52,27 @@ export interface CharStats {
     weight: number;
     totalWeight: number;
     zeny: number;
+    bonus: {
+      totalHealthPoints: number,
+      totalSpiritPoints: number,
+      totalWeight: number,
+    }
   };
   mainStats: {
-    strenght: number;
+    strength: number;
     agility: number;
     vitality: number;
     intelligence: number;
     dexterity: number;
     luck: number;
-  };
-  requiredPointsToLevel: {
-    strenght: number;
-    agility: number;
-    vitality: number;
-    intelligence: number;
-    dexterity: number;
-    luck: number;
+    bonus: {
+      strength: number;
+      agility: number;
+      vitality: number;
+      intelligence: number;
+      dexterity: number;
+      luck: number;
+    }
   };
   sideStats: {
     attack: number;
@@ -78,6 +83,16 @@ export interface CharStats {
     magicDefense: number;
     fleeRate: number;
     attackSpeed: number;
+    bonus: {
+      attack: number;
+      magicAttack: number;
+      hitRate: number;
+      critRate: number;
+      defense: number;
+      magicDefense: number;
+      fleeRate: number;
+      attackSpeed: number;
+    }
   };
 }
 
@@ -175,7 +190,7 @@ export interface JobData {
   id: number,
   name: string,
   statsBonus: {
-    strenght: number,
+    strength: number,
     agility: number,
     vitality: number,
     intelligence: number,
