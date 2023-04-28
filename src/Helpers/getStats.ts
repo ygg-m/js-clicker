@@ -196,3 +196,9 @@ export function getHitRate({
 
   return result
 }
+
+export function getCritRate(luk:number) {
+  const result = Math.floor(luk * 0.3)
+
+  return result < 1 ? 1 : result
+}

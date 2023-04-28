@@ -1,5 +1,5 @@
 import { ClickDefault, CountDefault, CurrentDefault } from "@/Data/DefaultValues";
-import { getHitRate, getSoftDefense, getSoftMagicDefense, getStatusATK, getStatusMATK } from "@/Helpers/getStats";
+import { getCritRate, getHitRate, getSoftDefense, getSoftMagicDefense, getStatusATK, getStatusMATK } from "@/Helpers/getStats";
 import {
   ClickTypes,
   CountTypes,
@@ -42,6 +42,7 @@ export const GameProvider: React.FC<GameContextProps> = ({ children }) => {
     updateSubStat_SoftDefense()
     updateSubStat_SoftMagicDefense()
     updateSubStat_HitRate()
+    updateSubStat_CritRate()
   }
 
   function updateSubStat_Attack() {
@@ -162,6 +163,25 @@ export const GameProvider: React.FC<GameContextProps> = ({ children }) => {
         sideStats: {
           ...current.character.stats.sideStats,
           hitRate: result
+        }
+        
+      }
+      }
+    })
+  }
+
+  function updateSubStat_CritRate() {
+    const result = getCritRate(current.character.stats.mainStats.luck)
+
+    setCurrent({
+      ...current,
+      character: {
+        ...current.character,
+      stats: {
+        ...current.character.stats,
+        sideStats: {
+          ...current.character.stats.sideStats,
+          critRate: result
         }
         
       }
