@@ -1,6 +1,7 @@
 import { BasicInfo } from "./Components/BasicInfo";
 import { Enemy } from "./Components/Enemy";
 import { Player } from "./Components/Player";
+import { Status } from "./Components/Status";
 import { useGame } from "./Context/GameContext";
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center">
       <BasicInfo />
+      <Status />
 
       <div className="flex gap-2">
         <Player />
