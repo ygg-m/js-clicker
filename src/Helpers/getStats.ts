@@ -49,7 +49,7 @@ export function getWeaponATK({
     str,
     dex
   );
-  const RefinementBonus = getWeaponATK_RefinementBonus(
+  const RefinementBonus = getWeaponRefinementBonus(
     upgradeLevel,
     weaponLevel
   );
@@ -80,7 +80,7 @@ function getWeaponATK_StatBonus(
   else return (baseWeaponDamage * str) / 200;
 }
 
-function getWeaponATK_RefinementBonus(
+function getWeaponRefinementBonus(
   upgradeLevel: number,
   weaponLevel: number
 ) {
@@ -126,3 +126,22 @@ export function getStatusMATK({
 
   return result
 }
+
+interface getWeaponMATK {
+  baseWeaponDamage: number,
+  weaponLevel: number,
+  upgradeLevel: number,
+}
+
+export function getWeaponMATK({
+  baseWeaponDamage: baseWeaponDamage,
+  weaponLevel: weaponLevel,
+  upgradeLevel: upgradeLevel,
+}: getWeaponMATK) {
+  const refinemetBonus = getWeaponRefinementBonus(upgradeLevel, weaponLevel)
+  const variance = (0.1 * weaponLevel) * (baseWeaponDamage + refinemetBonus)
+  const result = baseWeaponDamage + variance + refinemetBonus
+
+  return result
+}
+
