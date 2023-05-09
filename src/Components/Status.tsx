@@ -7,16 +7,16 @@ interface BaseStatProps {
   name: string;
   value: number;
   bonusValue: number;
-  levelUpAvailable?: boolean;
 }
 
 const BaseStat = ({
   name,
   value,
   bonusValue,
-  levelUpAvailable,
 }: BaseStatProps) => {
   const levelUpCost = getBaseStatCost(value);
+  const { statPoints } = useGame().current.character
+  const levelUpAvailable = statPoints > levelUpCost
 
   return (
     <div className="grid grid-cols-[1.8rem_1fr] gap-2">
@@ -67,7 +67,7 @@ export const Status = () => {
     <section className="grid w-full max-w-md overflow-hidden rounded-lg bg-gray-50 text-gray-800 outline outline-1 outline-gray-800">
       <DraggableWindow title="Status" originX={0} originY={215}>
         <article className="grid grid-cols-[1fr_.8fr_.8fr] grid-rows-6 gap-2 p-2 px-3">
-            <BaseStat name="Str" value={strength} bonusValue={bonus.strength} levelUpAvailable />
+            <BaseStat name="Str" value={strength} bonusValue={bonus.strength} />
             <SubStat name="Atk" value={attack} bonusValue={sideStats.bonus.attack} />
             <SubStat name="Def" value={defense} bonusValue={sideStats.bonus.defense} />
 

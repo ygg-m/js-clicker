@@ -1,4 +1,6 @@
 import { Character } from "./Character/Base";
+import { EquipmentSlotTypes } from "./Character/Equipment";
+import { ItemTypes } from "./Item";
 
 export interface CurrentTypes {
   character: Character;
@@ -19,4 +21,15 @@ export interface ClickTypes {
 export interface CountTypes {
   clicks: number;
   points: number;
+}
+
+export interface DetailWindowData {
+  x: number;
+  y: number;
+  equipData?: EquipmentSlotTypes,
+  itemData?: ItemTypes
+};
+
+export interface DetailData {
+
 }

@@ -1,10 +1,13 @@
 import { ClickDefault, CountDefault, CurrentDefault } from "@/Data/DefaultValues";
 import { getCritRate, getHitRate, getSoftDefense, getSoftMagicDefense, getStatusATK, getStatusMATK } from "@/Helpers/getStats";
+import { EquipmentSlotTypes } from "@/Types/Character/Equipment";
 import {
   ClickTypes,
   CountTypes,
   CurrentTypes,
+  DetailWindowData,
 } from "@/Types/GameTypes";
+import { ItemTypes } from "@/Types/Item";
 import { createContext, useContext, useEffect, useState } from "react";
 
 type GameContextType = {
@@ -13,6 +16,9 @@ type GameContextType = {
   current: CurrentTypes;
   handleClickerButton: Function;
   powerUpClick: Function;
+  detailWindows: DetailWindowData[]
+  handleDetailWindow: Function
+handleCloseDetailWindow: Function
 };
 
 const GameContext = createContext<GameContextType>({
@@ -21,6 +27,9 @@ const GameContext = createContext<GameContextType>({
   current: CurrentDefault,
   handleClickerButton: () => {},
   powerUpClick: () => {},
+  detailWindows: [],
+  handleDetailWindow: () => {},
+  handleCloseDetailWindow: () => {}
 });
 
 export const useGame = () => useContext(GameContext);
@@ -31,6 +40,19 @@ export const GameProvider: React.FC<GameContextProps> = ({ children }) => {
   const [click, setClick] = useState<ClickTypes>(ClickDefault);
   const [count, setCount] = useState<CountTypes>(CountDefault);
   const [current, setCurrent] = useState<CurrentTypes>(CurrentDefault);
+  const [detailWindows, setDetailWindows] = useState<DetailWindowData[]>([]);
+
+  function handleDetailWindow (e: React.MouseEvent, equipData?: EquipmentSlotTypes, itemData?: ItemTypes) {
+    e.preventDefault();
+    const x = e.clientX;
+    const y = e.clientY;
+    equipData ? setDetailWindows(prev => [...prev, { x, y, equipData }]) : setDetailWindows(prev => [...prev, { x, y, itemData }])
+    
+  };
+
+  function handleCloseDetailWindow (index: number) {
+    setDetailWindows(prev => prev.filter((_, i) => i !== index));
+  };
 
   function basicAttack() {
     
@@ -47,7 +69,7 @@ export const GameProvider: React.FC<GameContextProps> = ({ children }) => {
 
   function updateSubStat_Attack() {
     const result = getStatusATK({
-      weaponClass: current.character.equipment.handR?.subtype || "",
+      weaponClass: current.character.equipment.handR?.itemData.subtype || "",
       baseLevel: current.character.baseLevel,
       str: current.character.stats.mainStats.strength,
       dex: current.character.stats.mainStats.dexterity,
@@ -217,6 +239,9 @@ export const GameProvider: React.FC<GameContextProps> = ({ children }) => {
     current,
     handleClickerButton,
     powerUpClick,
+    detailWindows,
+    handleDetailWindow,
+handleCloseDetailWindow,
   };
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
 };

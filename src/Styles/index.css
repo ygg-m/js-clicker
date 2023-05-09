@@ -9,12 +9,19 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  cursor: url('../Assets/Cursor/normal_select.gif'), auto;
+}
+
+button {
+  cursor: url('../Assets/Cursor/link_select.gif'), auto;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+
 
 .bg-menu-header {
   background: linear-gradient(
@@ -77,11 +84,11 @@ code {
 .bg-lines {
   background-color: #f9fafb;
   opacity: 1;
-  background-size: 6px 6px;
+  background-size: 3px 3px;
   background-image: repeating-linear-gradient(
     0deg,
-    #ececec,
-    #ececec 1px,
+    #ecececee,
+    #ecececee 1px,
     #f9fafb 1px,
     #f9fafb
   );

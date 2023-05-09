@@ -1,18 +1,25 @@
 import { BasicInfo } from "./Components/BasicInfo";
+import { DetailWindow } from "./Components/DetailWindow";
 import { Enemy } from "./Components/Enemy";
+import { Equipment } from "./Components/Equipment";
 import { Player } from "./Components/Player";
 import { Status } from "./Components/Status";
 import { useGame } from "./Context/GameContext";
 
 function App() {
-  const { click, count, current, handleClickerButton, powerUpClick } = useGame();
-
-  console.log(current)
+  const { click, count, current, handleClickerButton, powerUpClick, detailWindows, handleCloseDetailWindow } = useGame();
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center">
+    <div className="flex min-h-screen flex-col items-center justify-center select-none z-0 overflow-hidden"> 
+      {detailWindows.map((window, i) => window.equipData ? (
+        <DetailWindow key={i} x={window.x} y={window.y} onClose={() => handleCloseDetailWindow(i)} equipData={window.equipData} />
+      ) : <DetailWindow key={i} x={window.x} y={window.y} onClose={() => handleCloseDetailWindow(i)} itemData={window.itemData} />
+      
+      )}
+
       <BasicInfo />
       <Status />
+      <Equipment />
 
       <div className="flex gap-2">
         <Player />

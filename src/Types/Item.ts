@@ -7,6 +7,7 @@ export interface ItemTypes {
     type: string,
     subtype: string,
     location: string,
+    cardSlots: number,
     attack: number,
     defense: number,
     property: string,

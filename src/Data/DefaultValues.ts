@@ -1,3 +1,6 @@
+import { ItemTypes } from "@/Types/Item";
+import { armorList, weaponList } from "./EquipList";
+
   export const ClickDefault = {
     power: 1,
   };
@@ -6,18 +9,34 @@
     points: 0,
   };
 
+  const CharEquipmentDefaultHandR = {
+    itemData: weaponList.find(e => e.id === 1201) as ItemTypes,
+    upgradeLevel: 7,
+    cards: [],
+    enchants: []
+  }
+
+  const CharEquipmentDefaultBody = {
+    itemData: armorList.find(e => e.id === 2301) as ItemTypes,
+    upgradeLevel: 4,
+    cards: [],
+    enchants: []
+  }
+
   export const CharEquipmentDefault = {
     headTop: null,
     headMid: null,
     headBottom: null,
-    body: null,
-    handR: null,
+    body: CharEquipmentDefaultBody,
+    handR: CharEquipmentDefaultHandR,
     handL: null,
     robe: null,
     shoes: null,
     accessoryR: null,
     accessoryL: null,
   }
+
+
 
   export const CharStatsDefault = {
     baseStats: {
